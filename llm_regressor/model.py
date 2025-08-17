@@ -6,6 +6,7 @@ from transformers import (
     BitsAndBytesConfig,
     set_seed,
 )
+from llm_regressor import SEED
 
 
 def investigate_tokenizer(model_name):
@@ -58,7 +59,7 @@ class Llama3Model:
         )
 
     def predict(self, prompt: str):
-        set_seed(42)
+        set_seed(SEED)
         inputs = self.tokenizer.encode(prompt, return_tensors="pt").to("cuda")
         attention_mask = torch.ones(inputs.shape, device="cuda")
         outputs = self.base_model.generate(

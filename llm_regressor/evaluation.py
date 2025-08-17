@@ -1,6 +1,6 @@
 import math
 import matplotlib.pyplot as plt
-from src.constants import COLOR_MAP, RESET
+from llm_regressor import COLOR_MAP, RESET
 
 
 class Tester:
@@ -72,3 +72,19 @@ class Tester:
     @classmethod
     def test(cls, function, data):
         cls(function, data).run()
+
+
+if __name__ == "__main__":
+    from datasets import load_dataset
+    from llm_regressor.model import Llama3Model
+    from llm_regressor import DATASET_NAME
+
+    # Get model
+    model = Llama3Model()
+    # Get dataset
+    dataset = load_dataset(DATASET_NAME)
+    train = dataset["train"]
+    test = dataset["test"]
+    # Predict and evaluate
+    model.predict(test[0]["text"])
+    Tester.test(model.predict, test)
