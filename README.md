@@ -1,1 +1,3 @@
-"# llm_regression" 
+# LLM Regression
+
+Can we actually do regression tasks with LLMs? And are they any good? Let's see...
