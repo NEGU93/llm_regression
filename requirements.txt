@@ -1,0 +1,10 @@
+datasets==3.3.2
+datasets==3.6.0
+huggingface_hub==0.34.4
+matplotlib==3.10.5
+peft==0.14.0
+python-dotenv==1.1.1
+torch==2.7.1
+transformers==4.49.0
+transformers==4.55.2
+trl==0.14.0
