@@ -23,7 +23,7 @@ def train(model: Llama3Model, train_dataset, eval_dataset=None):
 
     fine_tuning = SFTTrainer(
         model=model.base_model,
-        train_dataset=train,
+        train_dataset=train_dataset,
         eval_dataset=eval_dataset,
         peft_config=lora_parameters,
         args=train_parameters,
@@ -55,4 +55,4 @@ if __name__ == "__main__":
     print(f"Validation samples: {len(validation_split)}")
 
     # Predict and evaluate
-    train(model, train)
+    train(model, train_split, validation_split)

@@ -40,7 +40,7 @@ if wandb_api_key:
 
 
 # Hyperparameters for Training
-EPOCHS = 3  # you can do more epochs if you wish, but only 1 is needed - more is probably overkill
+EPOCHS = 2  # you can do more epochs if you wish, but only 1 is needed - more is probably overkill
 BATCH_SIZE = 1
 GRADIENT_ACCUMULATION_STEPS = 1
 LEARNING_RATE = 1e-4
@@ -67,7 +67,7 @@ lora_config = {
     "lora_dropout": 0.1,
     "r": 8,
     "bias": "none",
-    "task_typ": "CAUSAL_LM",
+    "task_type": "CAUSAL_LM",
     "target_modules": ["q_proj", "v_proj", "k_proj", "o_proj"],
 }
 
