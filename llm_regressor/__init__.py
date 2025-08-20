@@ -3,11 +3,10 @@ from huggingface_hub import login
 from dotenv import load_dotenv
 from datetime import datetime
 
-
 SEED = 42
 
 # Get tokens
-load_dotenv()
+load_dotenv(override=True)
 hf_token = os.getenv("HF_TOKEN")
 wandb_api_key = os.getenv("WANDB_API_KEY", None)
 
@@ -26,21 +25,22 @@ PROJECT_RUN_NAME = f"{PROJECT_NAME}-{RUN_NAME}"
 HUB_MODEL_NAME = f"{HF_USER}/{PROJECT_RUN_NAME}"
 
 # wandb
-LOG_TO_WANDB = True if wandb_api_key else False
+# LOG_TO_WANDB = True if wandb_api_key else False
+LOG_TO_WANDB = False  # Set to False for now, can be enabled later
 
-if wandb_api_key:
-    import wandb
+# if wandb_api_key:
+#     import wandb
 
-    wandb.login()
-    os.environ["WANDB_PROJECT"] = PROJECT_NAME
-    os.environ["WANDB_LOG_MODEL"] = "checkpoint"
-    os.environ["WANDB_WATCH"] = "gradients"
+#     wandb.login()
+#     os.environ["WANDB_PROJECT"] = PROJECT_NAME
+#     os.environ["WANDB_LOG_MODEL"] = "checkpoint"
+#     os.environ["WANDB_WATCH"] = "gradients"
 
-    wandb.init(project=PROJECT_NAME, name=RUN_NAME)
+#     wandb.init(project=PROJECT_NAME, name=RUN_NAME)
 
 
 # Hyperparameters for Training
-EPOCHS = 2  # you can do more epochs if you wish, but only 1 is needed - more is probably overkill
+EPOCHS = 1  # you can do more epochs if you wish, but only 1 is needed - more is probably overkill
 BATCH_SIZE = 1
 GRADIENT_ACCUMULATION_STEPS = 1
 LEARNING_RATE = 1e-4
@@ -50,9 +50,8 @@ OPTIMIZER = "paged_adamw_32bit"
 VALIDATION_PERCENTAGE = 0.1
 
 # Admin config - note that SAVE_STEPS is how often it will upload to the hub
-# I've changed this from 5000 to 2000 so that you get more frequent saves
-STEPS = 50
-SAVE_STEPS = 2000
+STEPS = 500
+SAVE_STEPS = 5000
 
 # Used for writing to output in color
 GREEN = "\033[92m"
