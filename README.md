@@ -1,54 +1,71 @@
 # LLM Regression
 
+[![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![HuggingFace](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-yellow)](https://huggingface.co/NEGU93)
+
 Can we actually do regression tasks with LLMs? And are they any good? Let's see...
 
-I do 2 main projects:
+There are two main projects here:
 
-- GPT-4 mini with RAG
-- Train Llama 3.1 with QLoRA 🕐 *(Coming soon)*
+- **🔍 RAG-enhanced GPT-4 mini** for improved contextual understanding  
+- **🦙 Fine-tuned Llama 3.1** with QLoRA optimization
 
 ## Benchmark models
 
-1. Random prices
-2. Average price of training set
-3. Bag of Words + Linear Regression
-4. Word2Vec + Linear Regression
-5. Word2Vec + Linear SVR
-6. GPT-4 mini
-7. **GPT-4 mini with RAG**
-8. Quantized Llama 3.1
-9. **Finedtuned Llama 3.1** 🕐 *(Coming soon)*
+
+| Rank | Model | Type | Status |
+|------|-------|------|--------|
+| 1 | Random prices | Baseline | ✅ |
+| 2 | Average price of training set | Baseline | ✅ |
+| 3 | Bag of Words + Linear Regression | Traditional ML | ✅ |
+| 4 | Word2Vec + Linear Regression | Traditional ML | ✅ |
+| 5 | Word2Vec + Linear SVR | Traditional ML | ✅ |
+| 6 | GPT-4 mini | LLM | ✅ |
+| 7 | **GPT-4 mini with RAG** | LLM + RAG | ✅ |
+| 8 | Quantized Llama 3.1 | LLM | ✅ |
+| 9 | **Fine-tuned Llama 3.1** | LLM + Fine-tuning | 🕐 *Coming soon* |
+
 
 ![benchmark_results](img/benchmark.png)
 
-## Quickstart
+## ⚡ Quickstart
 
-1. Install conda
-2. Create and install the environment with Python 3.11:
+### 1️⃣ Environment Setup
 
-   ```bash
-   conda env create -f environment.yml -n llm-regression python=3.11
-   conda activate llm-regression
-   ```
+```bash
+# Install conda (if not already installed)
+# Then create the environment
+conda env create -f environment.yml -n llm-regression python=3.11
+conda activate llm-regression
+```
 
-3. Create the `.env` file and add your token keys
+### 2️⃣ Configuration
 
-    ```env
-    OPENAI_API_KEY=sk-proj-...
-    HF_TOKEN=hf_...
-    WANDB_API_KEY=... (Optional)
-    ```
+Create your `.env` file with the required API keys:
 
-4. Run the benchmark `python -m llm_regressor.benchmark`
+```env
+OPENAI_API_KEY=sk-proj-your-openai-key-here
+HF_TOKEN=hf_your-huggingface-token-here
+WANDB_API_KEY=your-wandb-key-here  # Optional for experiment tracking
+```
 
-### RAG regression
+### 3️⃣ RAG Regression
 
-Uses RAG on gpt-4 mini model.
+Enhance GPT-4 mini with **Retrieval-Augmented Generation** for better price predictions.
 
-Before using RAG, you must create Chroma DB `python -m llm_regressor.rag_regressor.create_db`
+```bash
+python -m llm_regressor.rag_regressor.create_db
+```
 
+The RAG system creates a vector database of similar products to provide relevant context during inference.
 
-### Training Llama
+### 4️⃣ Run the Benchmark
+
+```bash
+python -m llm_regressor.benchmark
+```
+
+## 🦙 Training Llama
 
 Normally you DON'T need to train, you will download my trained model directly from Hugging Face, but if you wish to train follow this steps:
 
@@ -61,7 +78,15 @@ Normally you DON'T need to train, you will download my trained model directly fr
 - Select Training parameters (Optional): Change parameters like epochs, batch size, QLoRA hyper-parameters in [llm_regressor/__init__.py](https://github.com/NEGU93/llm_regression/blob/main/llm_regressor/__init__.py).
 - Then run `python -m llm_regressor.trainer`
 
-### The dataset
+### 📊 Dataset Information
 
-The dataset is a curated version of . 
-It is currently stored [here](https://huggingface.co/datasets/NEGU93/pricer-data) and it will be automatically downloaded with thanks to your HF_TOKEN.
+**Source**: Curated [Amazon Reviews 2023](https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023)  
+**Location**: [🤗 NEGU93/pricer-data](https://huggingface.co/datasets/NEGU93/pricer-data)  
+**Auto-download**: Via your `HF_TOKEN` 🔄
+
+### Dataset Statistics
+- **Training examples**: 400,000
+- **Test examples**: 200,000  
+- **Features**: Item text description + price
+- **Price range**: $1 - $1,000+
+- **Categories**: Electronics, Home & Garden, Sports, Books, and more
