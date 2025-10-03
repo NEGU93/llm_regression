@@ -23,7 +23,7 @@ There are two main projects here:
 | 6 | GPT-4 mini | LLM | ✅ |
 | 7 | **GPT-4 mini with RAG** | LLM + RAG | ✅ |
 | 8 | Quantized Llama 3.1 | LLM | ✅ |
-| 9 | **Fine-tuned Llama 3.1** | LLM + Fine-tuning | 🕐 *Coming soon* |
+| 9 | **Fine-tuned Llama 3.1** | LLM + Fine-tuning | ✅ |
 
 
 ![benchmark_results](img/benchmark.png)
