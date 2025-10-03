@@ -1,7 +1,7 @@
 import chromadb
 from tqdm import tqdm
 from datasets import load_dataset
-from llm_regressor import DATASET_NAME
+from llm_regression.llm_regressor import DATASET_NAME
 from sentence_transformers import SentenceTransformer
 
 DB = "products_vectorstore"

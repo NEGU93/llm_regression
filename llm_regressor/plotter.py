@@ -3,7 +3,8 @@ import plotly.graph_objects as go
 # Define colors for categories
 category_colors = {
     "Regressor": "skyblue",
-    "LLM": "blueviolet",
+    "RAG": "blueviolet",
+    "LLM": "steelblue",
     "Other": "lightgray",
 }
 
@@ -12,8 +13,10 @@ model_categories = {
     "Word2Vec LR Pricer": "Regressor",
     "Word2Vec LSVR Pricer": "Regressor",
     "Word2Vec Random Forest Pricer": "Regressor",
-    "GPT-4-Mini": "LLM",
-    "GPT-4-Mini with RAG": "LLM",
+    "GPT-4-Mini": "RAG",
+    "GPT-4-Mini with RAG": "RAG",
+    "Llama-3.1-8B": "LLM",
+    "Llama-3.1-8B (Fine-tuned)": "LLM",
 }
 
 

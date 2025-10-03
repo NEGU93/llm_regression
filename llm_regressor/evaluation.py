@@ -130,8 +130,8 @@ class Tester:
 
 if __name__ == "__main__":
     from datasets import load_dataset
-    from llm_regressor.model import Llama3Model
-    from llm_regressor import DATASET_NAME
+    from llm_regression.llm_regressor.trained_llama.model import Llama3Model
+    from llm_regression.llm_regressor import DATASET_NAME
 
     # Get model
     model = Llama3Model()

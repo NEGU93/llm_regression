@@ -1,4 +1,4 @@
-from llm_regressor.model import *
+from llm_regression.llm_regressor.trained_llama.model import *
 
 
 def test_extract_price():

@@ -1,6 +1,6 @@
 from peft import LoraConfig
 from trl import DataCollatorForCompletionOnlyLM, SFTTrainer, SFTConfig
-from llm_regressor.model import Llama3Model
+from llm_regressor.trained_llama.model import Llama3Model
 from llm_regressor import (
     lora_config,
     train_confifg,
@@ -38,7 +38,7 @@ def train(model: Llama3Model, train_dataset, eval_dataset=None):
 
 if __name__ == "__main__":
     from datasets import load_dataset
-    from llm_regressor import DATASET_NAME
+    from llm_regression.llm_regressor import DATASET_NAME
 
     # Get model
     model = Llama3Model()

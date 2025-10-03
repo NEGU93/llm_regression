@@ -201,6 +201,44 @@ def gpt4_mini_rag_pricer_fn(train):
     return model.price
 
 
+@benchmark_wrapper("Llama-3.1-8B")
+def llama_untrained_pricer_fn(train):
+    from llm_regressor.trained_llama.model import Llama3Model
+
+    model = Llama3Model()
+
+    def predict(item):
+        # prompt = item["text"]
+        return model.predict(item)
+
+    return predict
+
+
+@benchmark_wrapper("Llama-3.1-8B (Fine-tuned)")
+def llama_trained_pricer_fn(train):
+    from llm_regressor.trained_llama.model import Llama3Model
+    from peft import PeftModel
+    from llm_regressor import PROJECT_NAME
+
+    # Load base model
+    base_model = Llama3Model()
+
+    # Load fine-tuned LoRA weights
+    model_with_lora = PeftModel.from_pretrained(
+        base_model.base_model, f"{PROJECT_NAME}-2025-08-20_23.40.30"
+    )
+
+    # Merge LoRA weights for faster inference (optional)
+    model_with_lora = model_with_lora.merge_and_unload()
+    base_model.base_model = model_with_lora
+
+    def predict(item):
+        # prompt = item["text"]
+        return base_model.predict(item)
+
+    return predict
+
+
 def run_benchmark():
     # Load existing benchmark results if available
     if os.path.exists("benchmark_results.json"):
@@ -224,6 +262,10 @@ def run_benchmark():
     # benchmark_results = word2vec_rf_pricer_fn(benchmark_results, train, test)
     benchmark_results = gpt4_mini_pricer_fn(benchmark_results, train, test)
     benchmark_results = gpt4_mini_rag_pricer_fn(benchmark_results, train, test)
+    benchmark_results = llama_untrained_pricer_fn(
+        benchmark_results, train, test
+    )
+    benchmark_results = llama_trained_pricer_fn(benchmark_results, train, test)
 
     return benchmark_results
 
