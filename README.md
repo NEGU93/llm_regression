@@ -65,6 +65,35 @@ The RAG system creates a vector database of similar products to provide relevant
 python -m llm_regressor.benchmark
 ```
 
+## Conclusion
+
+Both RAG and fine-tuning successfully improved their base LLM models, demonstrating that Large Language Models can effectively handle regression tasks when properly optimized.
+
+### Key Findings
+
+- **RAG Enhancement**: GPT-4 mini with RAG significantly outperformed the vanilla model by providing relevant context for better price predictions
+- **Fine-tuning Impact**: Fine-tuned Llama 3.1 showed substantial improvement over its untrained quantized version
+
+### Llama Performance Factors
+
+The untrained quantized Llama model performed poorly due to:
+- Smaller model size compared to GPT-4 mini
+- Aggressive 4-bit quantization reducing model capacity
+
+### Training Configuration
+
+Fine-tuning was performed using QLoRA with:
+- **Epochs**: 1
+- **LoRA Alpha (α)**: 16  
+- **LoRA Rank (r)**: 8
+
+### Potential Improvements
+
+The fine-tuned Llama model could likely surpass the RAG approach with:
+- Higher `r` and `α` values for increased learning capacity
+- Training for 2-3 additional epochs
+- Reduced quantization (8-bit vs 4-bit)
+
 ## 🦙 Training Llama
 
 Normally you DON'T need to train, you will download my trained model directly from Hugging Face, but if you wish to train follow this steps:
