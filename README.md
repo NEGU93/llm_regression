@@ -74,7 +74,7 @@ Normally you DON'T need to train, you will download my trained model directly fr
     2. Click "Request access to this model"
     3. Fill out the access request form with your intended use case
     4. Wait for Meta's approval (usually takes 1-2 business days)
-    5. Once approved, your HF_TOKEN will have access to download the model
+    5. Once approved, your `HF_TOKEN` will have access to download the model
 - Select Training parameters (Optional): Change parameters like epochs, batch size, QLoRA hyper-parameters in [llm_regressor/__init__.py](https://github.com/NEGU93/llm_regression/blob/main/llm_regressor/__init__.py).
 - Then run `python -m llm_regressor.trainer`
 
@@ -88,5 +88,5 @@ Normally you DON'T need to train, you will download my trained model directly fr
 - **Training examples**: 400,000
 - **Test examples**: 200,000  
 - **Features**: Item text description + price
-- **Price range**: $1 - $1,000+
+- **Price range**: $1 - $1,000
 - **Categories**: Electronics, Home & Garden, Sports, Books, and more
